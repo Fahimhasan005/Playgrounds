@@ -1,5 +1,5 @@
 //: [Previous](@previous)
-
+import UIKit
 import Foundation
 
 var greeting = "Hello, playground"
@@ -15,29 +15,18 @@ var greeting = "Hello, playground"
         l = 2
         o = 1 */
    
+let inputString = "Fahim Hasan"
 
-    func WithParameterAndnoReturnType(name:String)  {
-       
-        var items:[String:Int]=[:]
-        
-        for str in name {
-            let key = String(str)
-            
-            let value = items[key] ?? 0
-            items [key]=value+1
-            
-            
-        }
-        
-        for (key,value)in items {
-            print("\(key)=\(value)")
-        }
+var counter: [Character:Int] = [:]
+
+for characterItem in inputString {
+    var currentCount = counter[characterItem] ?? 0
+    currentCount += 1
+    counter[characterItem] = currentCount
+    
 }
 
-let fahimhasan = "FahimHasan"
-WithParameterAndnoReturnType(name:fahimhasan)
-print ("")
-
+print(counter)
 
 /* 2. Write a function that returns a closure, which transforms its input by adding a particular suffix at the end.
  Example:
@@ -51,31 +40,23 @@ print ("")
  add_less("fear") ➞ "fearless"
  add_less("ruth") ➞ "ruthless" */
 
+func addSuffixFunction (suffix:String) ->((String) -> (String)) {
+    let myClouser = { input in
+        return input + suffix
+        
+    }
+    return myClouser
+}
 
-        
-        func add_suffix(_ suffix: String) -> (String) -> String {
-            
-            return {
-                (contents: String) -> String in
-                return contents + suffix;
-            }
-        }
-        
-        func add_suffix_2(_ suffix: String) -> (String) -> String {
-            
-            return { $0 + suffix}
-        }
-        
-        
-        let add_ly = add_suffix("ly")
-        
-        print(add_ly("hopeless"))
-        print(add_ly("total"))
-        
-        
-        
-        let add_less = add_suffix("less")
-        
-        print(add_less("fear"))
-        print(add_less("ruth"))
+let add_ly = addSuffixFunction(suffix: "ly")
+let totally = add_ly("Total")
+let hopelessly = add_ly ("Hopeles")
+print(totally)
+print(hopelessly)
+
+
+let addLessToString = addSuffixFunction(suffix:"less")
+let  fearless = addLessToString("Fear")
+print(fearless)
+    
         
